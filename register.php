@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Register | School ID System</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body class="bg-light d-flex justify-content-center align-items-center vh-100">
@@ -33,6 +33,15 @@
       <div class="mb-3">
         <label>Password</label>
         <input type="password" name="password" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label>Role</label>
+        <select name="role" class="form-select" required>
+          <option value="" disabled selected>-- Select Role --</option>
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+        </select>
       </div>
 
       <button type="submit" name="register" class="btn btn-success w-100">Register</button>
