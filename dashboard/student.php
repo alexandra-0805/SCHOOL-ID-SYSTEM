@@ -9,10 +9,11 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
 }
 
 $user_id = $_SESSION['user_id'];
+$email = $_SESSION['email']; // We set this during login in auth.php
 
-// Fetch student info from student table
-$stmt = $conn->prepare("SELECT * FROM student WHERE id = ?");
-$stmt->bind_param("i", $user_id);
+// ✅ FIXED: Fetch student info by EMAIL, not by ID
+$stmt = $conn->prepare("SELECT * FROM student WHERE email = ?");
+$stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 $student = $result->fetch_assoc();
@@ -20,6 +21,7 @@ $stmt->close();
 
 // If no profile found, redirect to complete profile form
 if (!$student || empty($student['first_name'])) {
+  $_SESSION['student_id'] = $student ? $student['id'] : null;
   header("Location: ../complete_profile.php");
   exit();
 }
@@ -58,7 +60,7 @@ $full_name = trim($student['first_name'] . ' ' . $student['last_name']);
             <p><strong>Course:</strong> <?= htmlspecialchars($student['course']) ?></p>
             <p><strong>Contact:</strong> <?= htmlspecialchars($student['contact_number']) ?></p>
             <p><strong>Address:</strong> <?= htmlspecialchars($student['address']) ?></p>
-            <a href="edit_profile.php" class="btn btn-outline-primary btn-sm">Edit Profile</a>
+            <a href="edit_student_profile.php" class="btn btn-outline-primary btn-sm">Edit Profile</a>
             <a href="change_password.php" class="btn btn-outline-warning btn-sm">Change Password</a>
           </div>
         </div>

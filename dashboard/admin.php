@@ -23,7 +23,8 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
     $conn->query("INSERT INTO activity_logs (admin_id, action, target_user) VALUES ($admin_id, 'Approved user ID', $user_id)");
   } 
   elseif ($action === 'verify') {
-    $stmt = $conn->prepare("UPDATE users SET verified=1 WHERE user_id=?");
+    // ✅ FIXED: Changed 'verified' to 'is_verified'
+    $stmt = $conn->prepare("UPDATE users SET is_verified=1 WHERE user_id=?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $stmt->close();
@@ -81,7 +82,8 @@ $users = $conn->query("SELECT * FROM users ORDER BY user_id ASC");
                 <td><?= $row['user_id'] ?></td>
                 <td><?= htmlspecialchars($row['email']) ?></td>
                 <td><?= $row['role'] ?></td>
-                <td><?= $row['verified'] ? '✅' : '❌' ?></td>
+                <!-- ✅ FIXED: Changed 'verified' to 'is_verified' -->
+                <td><?= $row['is_verified'] ? '✅' : '❌' ?></td>
                 <td><?= $row['status'] ?></td>
                 <td>
                   <a href="?action=approve&id=<?= $row['user_id'] ?>" class="btn btn-success btn-sm">Approve</a>
