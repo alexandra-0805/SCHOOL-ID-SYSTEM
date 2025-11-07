@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once("../includes/db_connect.php");
+require_once("../../includes/db_connect.php");
 
 // Check if logged in (works for all roles)
 if (!isset($_SESSION['user_id'])) {
-  header("Location: ../index.php");
+  header("Location: ../../index.php");
   exit();
 }
 
@@ -15,7 +15,7 @@ $role = $_SESSION['role'];
 <head>
   <meta charset="UTF-8">
   <title>Change Password | School ID System</title>
-  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
 
@@ -38,7 +38,7 @@ $role = $_SESSION['role'];
             <i class="bi bi-shield-lock"></i> Update Your Password
           </div>
           <div class="card-body">
-            <form action="../includes/process_change_password.php" method="POST" id="passwordForm">
+            <form action="../../includes/process_change_password.php" method="POST" id="passwordForm">
               
               <div class="mb-3">
                 <label for="current_password">Current Password</label>
@@ -81,7 +81,7 @@ $role = $_SESSION['role'];
     </div>
   </div>
 
-  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
   <script>
     // Client-side password match validation
     const form = document.getElementById('passwordForm');

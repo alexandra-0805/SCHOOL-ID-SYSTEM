@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("../includes/db_connect.php");
+require_once("../../includes/db_connect.php");
 
 // Check if user is logged in and is an admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
@@ -64,13 +64,13 @@ $users = $conn->query("SELECT * FROM users ORDER BY user_id ASC");
 <head>
   <meta charset="UTF-8">
   <title>Admin Dashboard | School ID System</title>
-  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
   <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2>Admin Dashboard</h2>
-      <a href="../logout.php" class="btn btn-secondary btn-sm">Logout</a>
+      <a href="../../logout.php" class="btn btn-secondary btn-sm">Logout</a>
     </div>
     
     <div class="card shadow">

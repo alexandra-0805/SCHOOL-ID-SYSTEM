@@ -71,11 +71,11 @@ if (isset($_POST['login'])) {
             ------------------- */
             if ($user['role'] == 'admin') {
                 // 🔑 Admin dashboard
-                header("Location: ../dashboard/admin.php");
+                header("Location: ../dashboard/admin/admin.php");
                 exit();
             } elseif ($user['role'] == 'teacher') {
                 // 👩‍🏫 Teacher dashboard
-                header("Location: ../dashboard/teacher.php");
+                header("Location: ../dashboard/teacher/teacher.php");
                 exit();
             } else {
                 // 🧩 Student check: if profile incomplete, redirect to form
@@ -95,7 +95,7 @@ if (isset($_POST['login'])) {
                 }
 
                 // Otherwise go to dashboard
-                header("Location: ../dashboard/student.php");
+                header("Location: ../dashboard/student/student.php");
                 exit();
             }
         } else {

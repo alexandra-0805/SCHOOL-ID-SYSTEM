@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once("../includes/db_connect.php");
+require_once("../../includes/db_connect.php");
 
 // Check if logged in and role is student
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
-  header("Location: ../index.php");
+  header("Location: ../../index.php");
   exit();
 }
 
@@ -29,7 +29,7 @@ if (!$student) {
 <head>
   <meta charset="UTF-8">
   <title>Edit Profile | School ID System</title>
-  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
 
@@ -48,7 +48,7 @@ if (!$student) {
     <div class="card shadow">
       <div class="card-header bg-primary text-white">Update Your Information</div>
       <div class="card-body">
-        <form action="../includes/process_edit_profile.php" method="POST" enctype="multipart/form-data">
+        <form action="../../includes/process_edit_profile.php" method="POST" enctype="multipart/form-data">
           
           <div class="row mb-3">
             <div class="col-md-6">
@@ -100,9 +100,9 @@ if (!$student) {
           <div class="mb-3">
             <label>Current Photo</label><br>
             <?php if (!empty($student['photo'])): ?>
-              <img src="../uploads/<?= htmlspecialchars($student['photo']) ?>" alt="Current Photo" class="rounded mb-2" width="100" height="100">
+              <img src="../../uploads/<?= htmlspecialchars($student['photo']) ?>" alt="Current Photo" class="rounded mb-2" width="100" height="100">
             <?php else: ?>
-              <img src="../assets/img/default_user.png" alt="No Photo" class="rounded mb-2" width="100" height="100">
+              <img src="../../assets/img/default_user.png" alt="No Photo" class="rounded mb-2" width="100" height="100">
             <?php endif; ?>
           </div>
 
@@ -121,6 +121,6 @@ if (!$student) {
     </div>
   </div>
 
-  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

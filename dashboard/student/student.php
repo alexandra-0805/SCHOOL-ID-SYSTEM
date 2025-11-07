@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("../includes/db_connect.php");
+require_once("../../includes/db_connect.php");
 
 // Check if logged in and role is student
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
@@ -22,7 +22,7 @@ $stmt->close();
 // If no profile found, redirect to complete profile form
 if (!$student || empty($student['first_name'])) {
   $_SESSION['student_id'] = $student ? $student['id'] : null;
-  header("Location: ../complete_profile.php");
+  header("Location: ../../complete_profile.php");
   exit();
 }
 
@@ -34,14 +34,14 @@ $full_name = trim($student['first_name'] . ' ' . $student['last_name']);
 <head>
   <meta charset="UTF-8">
   <title>Student Dashboard | School ID System</title>
-  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
 
   <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2>Welcome, <?= htmlspecialchars($full_name) ?></h2>
-      <a href="../logout.php" class="btn btn-secondary btn-sm">Logout</a>
+      <a href="../../logout.php" class="btn btn-secondary btn-sm">Logout</a>
     </div>
 
     <!-- Profile Info -->
@@ -50,7 +50,7 @@ $full_name = trim($student['first_name'] . ' ' . $student['last_name']);
       <div class="card-body">
         <div class="row">
           <div class="col-md-4 text-center">
-            <img src="<?= $student['photo'] ? '../uploads/' . htmlspecialchars($student['photo']) : '../assets/img/default_user.png' ?>" 
+            <img src="<?= $student['photo'] ? '../../uploads/' . htmlspecialchars($student['photo']) : '../../assets/img/default_user.png' ?>" 
                  alt="Profile Photo" class="rounded-circle mb-3" width="120" height="120">
           </div>
           <div class="col-md-8">
@@ -74,7 +74,7 @@ $full_name = trim($student['first_name'] . ' ' . $student['last_name']);
         <?php if (!empty($student['student_id'])): ?>
           <div class="border p-3 rounded bg-white d-inline-block">
             <h5><?= htmlspecialchars($full_name) ?></h5>
-            <img src="../assets/img/sample_qr.png" alt="QR Code" width="100">
+            <img src="../../assets/img/sample_qr.png" alt="QR Code" width="100">
             <p class="mt-2"><strong>ID STATUS:</strong> ✅ Issued</p>
             <a href="download_id.php" class="btn btn-success btn-sm">Download ID</a>
           </div>
@@ -96,6 +96,6 @@ $full_name = trim($student['first_name'] . ' ' . $student['last_name']);
     </div>
   </div>
 
-  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
