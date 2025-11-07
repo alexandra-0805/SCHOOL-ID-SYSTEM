@@ -40,6 +40,17 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
     $conn->query("INSERT INTO activity_logs (admin_id, action, target_user) VALUES ($admin_id, 'Deleted user account', $user_id)");
   }
 
+  elseif ($action === 'unapprove') {
+    $stmt = $conn->prepare("UPDATE users SET status='pending' WHERE user_id=?");
+    $stmt->bind_param("i", $user_id); $stmt->execute(); $stmt->close();
+    $conn->query("INSERT INTO activity_logs (admin_id, action, target_user) VALUES ($admin_id, 'Unapproved user ID', $user_id)");
+}
+elseif ($action === 'unverify') {
+    $stmt = $conn->prepare("UPDATE users SET is_verified=0 WHERE user_id=?");
+    $stmt->bind_param("i", $user_id); $stmt->execute(); $stmt->close();
+    $conn->query("INSERT INTO activity_logs (admin_id, action, target_user) VALUES ($admin_id, 'Unverified user email', $user_id)");
+}
+
   header("Location: admin.php");
   exit();
 }
@@ -61,7 +72,7 @@ $users = $conn->query("SELECT * FROM users ORDER BY user_id ASC");
       <h2>Admin Dashboard</h2>
       <a href="../logout.php" class="btn btn-secondary btn-sm">Logout</a>
     </div>
-
+    
     <div class="card shadow">
       <div class="card-header bg-success text-white">User Management</div>
       <div class="card-body">
@@ -76,23 +87,50 @@ $users = $conn->query("SELECT * FROM users ORDER BY user_id ASC");
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <?php while ($row = $users->fetch_assoc()): ?>
-              <tr>
-                <td><?= $row['user_id'] ?></td>
-                <td><?= htmlspecialchars($row['email']) ?></td>
-                <td><?= $row['role'] ?></td>
-                <!-- ✅ FIXED: Changed 'verified' to 'is_verified' -->
-                <td><?= $row['is_verified'] ? '✅' : '❌' ?></td>
-                <td><?= $row['status'] ?></td>
-                <td>
-                  <a href="?action=approve&id=<?= $row['user_id'] ?>" class="btn btn-success btn-sm">Approve</a>
-                  <a href="?action=verify&id=<?= $row['user_id'] ?>" class="btn btn-info btn-sm">Verify</a>
-                  <a href="?action=delete&id=<?= $row['user_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</a>
-                </td>
-              </tr>
-            <?php endwhile; ?>
-          </tbody>
+          <div class="mb-2">
+  <input type="text" id="searchBox" class="form-control form-control-sm w-25"
+         placeholder="Search e-mail…">
+</div>
+
+<tbody id="userTable">
+<?php while ($row = $users->fetch_assoc()): ?>
+  <tr data-email="<?= strtolower($row['email']) ?>">
+    <td><?= $row['user_id'] ?></td>
+    <td><?= htmlspecialchars($row['email']) ?></td>
+    <td><?= $row['role'] ?></td>
+    <td><?= $row['is_verified'] ? '✅' : '❌' ?></td>
+    <td><?= $row['status'] ?></td>
+    <td class="text-nowrap">
+
+      <?php if ($row['status'] === 'approved'): ?>
+        <a href="?action=unapprove&id=<?= $row['user_id'] ?>" class="btn btn-warning btn-sm">Unapprove</a>
+      <?php else: ?>
+        <a href="?action=approve&id=<?= $row['user_id'] ?>" class="btn btn-success btn-sm">Approve</a>
+      <?php endif; ?>
+
+      <?php if ($row['is_verified']): ?>
+        <a href="?action=unverify&id=<?= $row['user_id'] ?>" class="btn btn-outline-info btn-sm">Unverify</a>
+      <?php else: ?>
+        <a href="?action=verify&id=<?= $row['user_id'] ?>" class="btn btn-info btn-sm">Verify</a>
+      <?php endif; ?>
+
+      <a href="?action=delete&id=<?= $row['user_id'] ?>"
+         class="btn btn-danger btn-sm"
+         onclick="return confirm('Are you sure?');">Delete</a>
+    </td>
+  </tr>
+<?php endwhile; ?>
+</tbody>
+
+<script>
+/* ➋ 3-line live filter */
+document.getElementById('searchBox').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll('#userTable tr').forEach(tr =>
+    tr.style.display = tr.dataset.email.includes(q) ? '' : 'none'
+  );
+});
+</script>
         </table>
       </div>
     </div>
