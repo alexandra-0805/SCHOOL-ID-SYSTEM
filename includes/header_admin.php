@@ -24,6 +24,11 @@ $admin_email = $_SESSION['email'] ?? '';
             📊 Dashboard
           </a>
         </li>
+         <li class="nav-item">
+          <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'admin_id.php' ? 'active' : '' ?>" href="admin_id.php">
+            💳 ID's
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'users.php' ? 'active' : '' ?>" href="admin_users.php">
             👥 Users

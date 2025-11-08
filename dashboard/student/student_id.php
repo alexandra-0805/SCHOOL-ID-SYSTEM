@@ -125,7 +125,7 @@ $full_name = trim($student['first_name'] . ' ' . $student['last_name']);
   <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2>Request Student ID</h2>
-      <a href="student.php" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+      <a href="student_dashboard.php" class="btn btn-secondary btn-sm">Back to Dashboard</a>
     </div>
 
     <!-- Success/Error Messages -->
