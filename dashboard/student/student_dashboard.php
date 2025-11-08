@@ -76,21 +76,28 @@ $full_name = trim($student['first_name'] . ' ' . $student['last_name']);
     </div>
 
     <!-- Digital ID Card -->
-    <div class="card shadow mb-4">
-      <div class="card-header bg-success text-white">My Digital ID Card</div>
-      <div class="card-body text-center">
-        <?php if (!empty($student['student_id'])): ?>
-          <div class="border p-3 rounded bg-white d-inline-block">
-            <h5><?= htmlspecialchars($full_name) ?></h5>
-            <img src="../../assets/img/sample_qr.png" alt="QR Code" width="100">
-            <p class="mt-2"><strong>ID STATUS:</strong> ✅ Issued</p>
-            <a href="download_id.php" class="btn btn-success btn-sm">Download ID</a>
-          </div>
-        <?php else: ?>
-          <p class="text-muted">Your ID has not been generated yet.</p>
-        <?php endif; ?>
+<div class="card shadow mb-4">
+  <div class="card-header bg-success text-white">My Digital ID Card</div>
+  <div class="card-body text-center">
+    <?php if (!empty($student['student_id'])): ?>
+      <div class="border p-3 rounded bg-white d-inline-block" style="min-width:260px;">
+        <h5><?= htmlspecialchars($full_name) ?></h5>
+
+        <!-- dynamic QR image served by qr.php -->
+        <img src="qr.php" alt="QR Code" width="150" height="150" style="display:block;margin:0 auto;">
+
+        <p class="mt-2"><strong>ID STATUS:</strong> ✅ Issued</p>
+
+        <!-- Download the printable ID page -->
+        <a href="download_id.php" class="btn btn-success btn-sm">Open / Download ID</a>
+        <!-- Download QR image directly -->
+        <a href="qr.php?download=1" class="btn btn-outline-secondary btn-sm ms-2">Download QR</a>
       </div>
-    </div>
+    <?php else: ?>
+      <p class="text-muted">Your ID has not been generated yet.</p>
+    <?php endif; ?>
+  </div>
+</div>
 
     <!-- ID Issuance Status -->
     <div class="card shadow mb-4">
