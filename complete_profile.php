@@ -29,7 +29,7 @@ if (!empty($student['first_name']) &&
   $_SESSION['role'] = 'student';
   
   // Redirect to student dashboard
-  header("Location: dashboard/student/student.php");
+  header("Location: dashboard/student/student_dashboard.php");
   exit;
 }
 ?>

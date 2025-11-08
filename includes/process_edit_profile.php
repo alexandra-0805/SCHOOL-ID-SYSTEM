@@ -77,7 +77,7 @@ if ($stmt->execute()) {
     $_SESSION['full_name'] = $full_name;
 
     $_SESSION['success'] = "Profile updated successfully!";
-    header("Location: ../dashboard/student.php");
+    header("Location: ../dashboard/student_dashboard.php");
     exit();
 } else {
     $_SESSION['error'] = "Error updating profile: " . $conn->error;

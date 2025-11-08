@@ -26,9 +26,15 @@ if (!$student || empty($student['first_name'])) {
   exit();
 }
 
+// Store in session for header_student.php to use
+$_SESSION['student_first_name'] = $student['first_name'] ?? '';
+$_SESSION['student_last_name'] = $student['last_name'] ?? '';
+$_SESSION['student_photo'] = $student['photo'] ?? '';
+
 // Combine name
 $full_name = trim($student['first_name'] . ' ' . $student['last_name']);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +44,8 @@ $full_name = trim($student['first_name'] . ' ' . $student['last_name']);
 </head>
 <body class="bg-light">
 
+<?php include '../../includes/header_student.php'; ?>
+
   <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2>Welcome, <?= htmlspecialchars($full_name) ?></h2>
@@ -46,7 +54,7 @@ $full_name = trim($student['first_name'] . ' ' . $student['last_name']);
 
     <!-- Profile Info -->
     <div class="card shadow mb-4">
-      <div class="card-header bg-primary text-white">My Profile</div>
+      <div class="card-header bg-success text-white">My Profile</div>
       <div class="card-body">
         <div class="row">
           <div class="col-md-4 text-center">

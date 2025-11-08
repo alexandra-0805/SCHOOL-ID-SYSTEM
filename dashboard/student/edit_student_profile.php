@@ -20,7 +20,7 @@ $stmt->close();
 
 if (!$student) {
   $_SESSION['error'] = "Student profile not found.";
-  header("Location: student.php");
+  header("Location: student_dashboard.php");
   exit();
 }
 ?>
@@ -36,7 +36,7 @@ if (!$student) {
   <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2>Edit Profile</h2>
-      <a href="student.php" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+      <a href="student_dashboard.php" class="btn btn-secondary btn-sm">Back to Dashboard</a>
     </div>
 
     <?php if(isset($_SESSION['success'])): ?>
@@ -114,7 +114,7 @@ if (!$student) {
 
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Save Changes</button>
-            <a href="student.php" class="btn btn-outline-secondary">Cancel</a>
+            <a href="student_dashboard.php" class="btn btn-outline-secondary">Cancel</a>
           </div>
         </form>
       </div>

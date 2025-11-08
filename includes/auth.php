@@ -95,7 +95,7 @@ if (isset($_POST['login'])) {
                 }
 
                 // Otherwise go to dashboard
-                header("Location: ../dashboard/student/student.php");
+                header("Location: ../dashboard/student/student_dashboard.php");
                 exit();
             }
         } else {

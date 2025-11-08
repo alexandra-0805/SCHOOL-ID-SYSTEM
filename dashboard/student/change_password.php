@@ -22,7 +22,7 @@ $role = $_SESSION['role'];
   <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2>Change Password</h2>
-      <a href="<?= $role ?>.php" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+      <a href="student_dashboard.php" class="btn btn-secondary btn-sm">Back to Dashboard</a>
     </div>
 
     <?php if(isset($_SESSION['success'])): ?>
@@ -60,7 +60,7 @@ $role = $_SESSION['role'];
 
               <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-warning">Change Password</button>
-                <a href="<?= $role ?>.php" class="btn btn-outline-secondary">Cancel</a>
+                <a href="student_dashboard.php" class="btn btn-outline-secondary">Cancel</a>
               </div>
             </form>
           </div>

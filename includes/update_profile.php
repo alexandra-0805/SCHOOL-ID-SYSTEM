@@ -67,7 +67,7 @@ if ($stmt->execute()) {
     // Don't overwrite $_SESSION['user_id'] - it's already set from login!
     // The user_id should remain the one from the 'users' table, not the student table
     
-    header("Location: ../dashboard/student.php");
+    header("Location: ../dashboard/student_dashboard.php");
     exit();
 } else {
     $_SESSION['error'] = "Error updating profile: " . $conn->error;
